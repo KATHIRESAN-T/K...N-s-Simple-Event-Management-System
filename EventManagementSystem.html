@@ -1,0 +1,895 @@
+
+<!-- This is the KATHIRESAN's Simple Event Management System With HTML, CSS, JS, DOM-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEC Event Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+
+    html, body {    height: 100%;     margin: 0;    }
+
+    body {    display: flex;    flex-direction: column;    font-family: Arial, sans-serif, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    }
+
+    body {    background-image: url('paniback1.gif');    background-size: cover;    background-position: center center;    background-attachment: fixed;    background-repeat: no-repeat;    }
+
+    .overlay {    position: absolute;    top: 0;    left: 0;    width: 100%;    height: 100%;    background-color: rgba(0, 0, 0, 0.4);    z-index: -1;    }
+
+    .container1 {    background-color: rgba(255, 255, 255, 0.8);    padding: 20px;    border-radius: 10px;    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);    }
+
+    .main-content {    flex: 1;   }
+
+    *, *::before, *::after {    box-sizing: border-box;    }
+
+    header {    position: sticky;    top: 0;    z-index: 100;    background-color: #b56c6c;    color: white;    padding: 10px 20px;    display: flex;    justify-content: space-between;    align-items: center;    }
+
+    .h1-header:hover{    font-size: 25px;    }
+
+    header ul {    list-style: none;    padding: 0;    margin: 0;    display: flex;    }
+
+    header li {    margin-left: 20px;    }
+
+    .header-right ul {    list-style: none;    padding: 0;    margin: 0;    display: flex;    }
+
+    .header-right li {    margin-left: 20px;    }
+
+    .header-right a {    font-family: 'Lucida Handwriting', cursive;    font-size: 16px;    color: #d9d9d9;    text-decoration: none;    padding: 8px 16px;    border-radius: 4px;    transition: background-color 0.3s ease, color 0.3s ease;    }
+
+    .header-right a:hover {    background-color: #7c5330;    color: white;    font-size: 20px;    }
+
+    .header-right a.active {    background-color: #7c5330;    color: white;    font-weight: bold;    }
+
+    #navbar-logout a:hover {    background-color: #d9534f;    color: white;    }
+
+    .header-right a.active:hover {    background-color: #5e3e26;    color: white;    }
+
+    header h1, header h2, header h3, header h4, header h5, header h6 {    font-family: 'Lucida Handwriting', cursive;    font-weight: normal;    color: #ffffff;    text-transform: none;    letter-spacing: 1px;    }
+
+    header h1 {    font-size: 28px;    }
+
+    header h2 {    font-size: 24px;    }
+
+    header h3, header h4, header h5, header h6 {    font-size: 20px;    }
+
+    header a {    font-family: 'Lucida Handwriting', cursive;    font-size: 16px;    color: #d9d9d9;    text-decoration: none;    }
+
+    header a:hover {    color: #7c5330;    }
+
+    header .header-left {    display: flex;    align-items: center;    }
+
+    header .header-left img {    height: 50px;    margin-right: 10px;    }
+
+    .title {    display: flex;    align-items: center;    }
+
+    .title h1 {    margin: 0;    font-size: 20px;    }
+
+    .dropdown {    position: relative;    margin-left: 10px;    cursor: pointer;    }
+
+    .dropdown span {    font-size: 18px;    margin-left: 10px;    }
+
+    .dropdown-content {    display: none;    position: absolute;    background-color: #f9f9f9;    color: rgb(92, 49, 49);    padding: 10px;    box-shadow: 0px 8px 16px rgba(98, 74, 74, 0.2);    border-radius: 10px;    z-index: 10;    margin-top: 5px;    width: 300px;    line-height: 1.8;    text-align: center;    opacity: 0;    transition: opacity 0.3s ease-in-out;    }
+
+    .dropdown:hover .dropdown-content {    display: block;    opacity: 1;    }
+
+    .about-section {    display: flex;    justify-content: space-between;    align-items: center;    padding: 50px;    background: #f4f4f9;    border-radius: 10px;    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);    margin: 30px auto;    max-width: 1500px;    }
+
+    .about-section:hover {    border: 2px solid #7c5330;    }
+
+    .about-content {    max-width: 50%;    font-family: 'Arial', sans-serif;    color: #333;    line-height: 1.8;    }
+
+    .about-content h2 {    font-size: 2.5em;    color: #4e5d6c;    margin-bottom: 20px;    text-transform: uppercase;    font-weight: 700;    letter-spacing: 1px;    text-align: left;    transition: color 0.3s ease;    }
+
+    .about-content h2:hover {    color: #7c5330;    }
+
+    .about-content p {    font-size: 1.1em;    color: #666;    margin-bottom: 20px;    text-align: justify;    }
+
+    .image-carousel {    max-width: 50%;    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);    border-radius: 10px;    overflow: hidden;    position: relative;     }
+
+    #carousel-image {    width: 650px;    height: 500px;    border-radius: 10px;    object-fit: cover;    transition: transform 0.4s ease-in-out;    }
+
+    .image-carousel:hover #carousel-image {    transform: scale(1.05);    }
+
+    @media (max-width: 768px) {    .about-section {        flex-direction: column;        align-items: center;    }
+
+                                   .about-content {        max-width: 90%;        text-align: center;    }
+
+                                   .image-carousel {        max-width: 80%;        margin-top: 20px;    }    }
+
+
+    * {    margin: 0;    padding: 0;    box-sizing: border-box;    font-family: 'Arial', sans-serif;    }
+
+    body {    background-color: #f7f8f9;    color: #333;    }
+
+    .latest-events, .upcoming-events, .registered-events, .login, .forgot-password {    background-color: #ffffff;    padding: 30px;    width: 1400px;    border-radius: 12px;    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);    margin: 20px 0;    margin-left: 40px;    transition: box-shadow 0.3s ease, transform 0.3s ease;    }
+
+    .latest-events:hover, .upcoming-events:hover, .registered-events:hover, .login:hover, .forgot-password:hover {    transform: translateY(-5px);    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);    border: 2px solid #7c5330;    }
+
+    #latest-events-container, .event-container {    display: flex;    justify-content: space-between;    align-items: center;    gap: 20px;    flex-wrap: wrap;    }
+
+    .latest-content{    font-size: 50px;    color: #77787a80;    font-family: 'Arial', sans-serif;    } 
+
+    .latest-content:hover{    color: #1e4133;     }
+
+    fieldset {    background-color: #fafafa;    border: 2px solid #4c4c4c;    border-radius: 8px;    padding: 20px;    width: 1400px;    max-width: 1400px;    margin: 20px auto;    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);    transition: transform 0.3s ease, box-shadow 0.3s ease;    display: flex;    flex-direction: column;    align-items: center;    }
+
+    fieldset:hover {    transform: scale(1.01);    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);     }
+
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;600&family=Lora:wght@400;700&display=swap');
+
+    legend {    font-family: 'papyrus', fantasy;     font-size: 26px;    font-weight: 700;    color: #333;    margin-bottom: 15px;    text-transform: uppercase;    letter-spacing: 1px;    border-bottom: 2px solid #103d6d;    padding-bottom: 10px;    transition: color 0.3s ease, transform 0.3s ease;    }
+
+    legend:hover {    color: #297227;    transform: translateX(5px);    }
+
+    table td:first-child {    width: 60%;    padding: 15px;    font-size: 20px;    color: #103d6d;    }
+
+    table td:last-child {    width: 40%;    }
+
+    .ed {    font-family: 'Lora', serif;    font-size: 18px;    font-weight: 400;    color: #a61111;    line-height: 1.6;    padding-top: 20px;    margin-bottom: 15px;    text-align: justify;    transition: color 0.3s ease;    }
+
+    .ed:hover {    color: #88a6c7;    text-decoration: underline;    }
+
+    .event-image {    width: 100%;    height: 300px;    object-fit: cover;    border-radius: 8px;    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);    transition: transform 0.3s ease;    }
+
+    .event-image:hover {    transform: scale(1.05);    }
+
+    .event-container:hover {    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);    transform: translateY(-5px);    }
+
+    .view-link {    font-family: 'Roboto', sans-serif;    font-size: 16px;    font-weight: 600;    color: #103d6d;    text-decoration: none;    transition: color 0.3s ease, transform 0.3s ease;    }
+
+    .view-link:hover {    color: #0056b3;    text-decoration: underline;    transform: translateY(-3px);    }
+
+    table {    width: 100%;    border-collapse: collapse;    margin-top: 10px;    }
+
+    table:hover{    border: #103d6d;    }
+
+    table th, table td {    padding: 15px;    text-align: left;    vertical-align: middle;    border-bottom: 2px solid #ddd;    }
+
+    table tr:nth-child(even) {    background-color: #f9f9f9;    }
+
+    table th {    background-color: #007BFF;    color: white;    text-transform: uppercase;    letter-spacing: 1px;    }
+
+    input[type="text"], input[type="email"], input[type="number"], input[type="password"], input[type="tel"] {    width: 100%;    padding: 12px;    margin: 8px 0;    border: 1px solid #ccc;    border-radius: 8px;    font-size: 16px;    background-color: #f8f8f8;    transition: all 0.3s ease;    }
+
+    input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="tel"]:focus {    border-color: #007BFF;    outline: none;    background-color: #fff;    }
+
+    button {    width: 100%;    padding: 15px;    background-color: #982417;    color: white;    border: none;    border-radius: 8px;    cursor: pointer;    font-size: 18px;    font-weight: 600;    transition: background-color 0.3s ease, transform 0.3s ease;    }
+
+    button:hover {    background-color: #a44728;    transform: scale(1.05);    }
+
+    button.secondary {    background-color: #c22929;    color: #333;    }
+
+    button.secondary:hover {    background-color: #9b2222;    }
+
+    footer {    background-color: #b56c6c;    color: white;    text-align: center;    padding: 30px;    font-size: 16px;    width: 100%;    position: relative;    bottom: 0;    }
+
+    .foot p {    margin: 5px 0;    }
+
+    .footer-p {    display: inline;    margin: 0;    padding: 0;    font-size: 16px;    }
+
+    .footer-line {    display: flex;    justify-content: center;    margin-bottom: 20px;    }
+
+    .footer-line p {    margin: 0 5px;    }
+
+    .footer-line i {    margin-right: 5px;    color: #b21111;    font-size: 20px;    }
+
+    .footer-line i.fas.fa-globe {    color: #1a601c;    }
+
+    .footer-line i.fas.fa-envelope {    color: #acbf1b9e;    }
+
+    .footer-line i.fas.fa-phone {    color: #11b473;    }
+
+    .footer-p:hover {    font-size: 18px;    }
+
+    .hidden {    display: none;    }
+
+    .home, .upcoming-events, .login, .event-details, .registered-events {    display: none;    }
+
+    .active {    display: block;    }
+
+    .container {    max-width: 800px;    margin: 20px auto;    padding: 25px;    border: 1px solid #ccc;    border-radius: 12px;    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);    }
+
+    .password-container {   position: relative;    width: 100%;     }
+
+    .eye-icon {   position: absolute;     right: 10px;     top: 50%;      transform: translateY(-50%);    cursor: pointer;    }
+
+    .password-container input {    width: 100%;    padding: 12px;    padding-right: 45px;    font-size: 16px;    border: 1px solid #ccc;    border-radius: 8px;    }
+
+    .password-container:hover {    color: #007BFF;    }
+
+    h2 {    text-align: center;    }
+
+    #event-details-container {    padding: 20px;    background: #f9f9f9;    border-radius: 5px;    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);    }
+
+    #event-details-container h3 {    font-size: 24px;    margin-bottom: 10px;    }
+
+    #event-details-container p {    font-size: 16px;    margin: 5px 0;    justify-content: space-between;    }
+
+    .event-details {    display: block;    width: 80%;    max-width: 900px;    margin: 40px auto;    background-color: #ffffff;    border-radius: 10px;    padding: 30px;    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);    opacity: 0;    transform: scale(0.9);    transition: all 0.3s ease-in-out;    }
+
+    .event-details.show {    opacity: 1;    transform: scale(1);    }
+
+    .event-details h3 {    font-size: 2.5rem;    font-weight: bold;    color: #333;    margin-bottom: 20px;    text-align: center;    font-family: 'Roboto', sans-serif;    }
+
+    .event-details p {    font-size: 1.2rem;    line-height: 1.6;    color: #555;    margin-bottom: 15px;    }
+
+    .event-details strong {    font-weight: 700;    color: #333;    }
+
+    .event-details ul {    list-style-type: none;    padding: 0;    }
+
+    .event-details ul li {    font-size: 1.1rem;    margin-bottom: 10px;    color: #666;    }
+
+    .event-details ul li strong {    color: #2c3e50;    }
+
+    .register-button {    background-color: #2ecc71;    color: white;    padding: 12px 25px;    font-size: 1.2rem;    font-weight: bold;    border: none;    border-radius: 5px;    cursor: pointer;    transition: background-color 0.3s ease-in-out;    display: inline-block;    margin-right: 20px;    margin-top: 20px;    }
+
+    .register-button:hover {    background-color: #27ae60;    }
+
+    .event-details button {    background-color: #982417;    color: white;    padding: 12px 25px;    font-size: 1.2rem;    font-weight: bold;    border: none;    border-radius: 5px;    cursor: pointer;    transition: background-color 0.3s ease-in-out;    display: inline-block;    margin-top: 20px;    }
+
+    .event-details button:hover {    background-color: #c0392b;    }
+
+    .event-details .buttons {    text-align: center;    margin-top: 20px;    }
+
+    .event-details img {    max-width: 100%;    height: auto;    margin-bottom: 20px;    border-radius: 10px;    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);    }
+
+    .event-details.show {    opacity: 1;    transform: scale(1);    }
+
+    @keyframes fadeIn {    from { opacity: 0; }    to { opacity: 1; }  }
+
+    @media only screen and (max-width: 767px) {
+    header {        flex-direction: column;        text-align: center;    }
+
+    .about-section, .image-carousel, .latest-events, .upcoming-events, .event-container {        flex-direction: column;        text-align: center;    }
+
+    .about-content, .image-carousel, .title {        flex: 1 1 100%;    }
+
+    .dropdown-content {        width: 80%;    }
+
+    button, input {        width: 100%;    }
+
+    .event-container {        gap: 10px;    }
+
+    table td {        display: block;        width: 100%;    }
+
+    table td:first-child, table td:last-child {        width: 100%;    }    }
+
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .about-section, .image-carousel, .latest-events, .upcoming-events {        flex-direction: row;        gap: 20px;    }
+
+    .about-content, .image-carousel {        flex: 1 1 45%;    }
+
+    button {        width: auto;    }    }
+
+    </style>
+
+    <script>
+
+       const upcomingEvents = [
+    {
+        eventId: 1,
+        title: "Workshop on Artificial Intelligence",
+        description: "Join us for an informative and hands-on workshop on Artificial Intelligence, where industry experts will discuss the latest trends in AI. The session will cover a variety of AI concepts, from machine learning to neural networks, providing attendees with a solid understanding of the field. Whether you're a beginner or looking to enhance your existing knowledge, this workshop is designed for all skill levels and will offer valuable insights into the future of AI technology.",
+        date: "2024-12-20",
+        time: "10:00 AM",
+        venue: "PEC Auditorium",
+        image: "upimage1.jpg",
+        agenda: [
+            { time: "10:00 AM", activity: "Introduction to AI" },
+            { time: "10:30 AM", activity: "AI in Industry" },
+            { time: "11:00 AM", activity: "Machine Learning Overview" },
+            { time: "11:30 AM", activity: "Deep Learning Basics" },
+            { time: "12:00 PM", activity: "Q&A and Networking" }
+        ]
+    },
+    {
+        eventId: 2,
+        title: "Annual Sports Meet",
+        description: "The Annual Sports Meet at PEC brings together athletes from all disciplines to showcase their athletic abilities. The event features various sports competitions, from track and field to football and relay races, providing an opportunity for students to compete, demonstrate teamwork, and celebrate their physical achievements. Come be a part of this exciting day of sportsmanship and school spirit, and cheer on your peers as they battle for glory!",
+        date: "2024-12-25",
+        time: "9:00 AM",
+        venue: "PEC Grounds",
+        image: "upimage2.jpg",
+        agenda: [
+            { time: "09:00 AM", activity: "Opening Ceremony" },
+            { time: "09:30 AM", activity: "Track Events" },
+            { time: "10:30 AM", activity: "Football Match" },
+            { time: "11:30 AM", activity: "Relay Race" },
+            { time: "12:30 PM", activity: "Closing Ceremony" }
+        ]
+    },
+    {
+        eventId: 3,
+        title: "Cultural Fest",
+        description: "Get ready for an extraordinary celebration of culture at the PEC Cultural Fest! This event will feature a wide variety of performances showcasing the artistic talents of our students. From traditional dance performances to music and live art exhibitions, this fest is an excellent opportunity to experience the vibrant cultural diversity that makes PEC unique. Join us for an evening filled with creativity, expression, and artistic brilliance!",
+        date: "2025-01-10",
+        time: "5:00 PM",
+        venue: "PEC Grounds",
+        image: "upimage3.jpg",
+        agenda: [
+            { time: "05:00 PM", activity: "Opening Ceremony" },
+            { time: "05:30 PM", activity: "Traditional Dance Performances" },
+            { time: "06:30 PM", activity: "Music Performance" },
+            { time: "07:00 PM", activity: "Art and Craft Exhibition" },
+            { time: "08:00 PM", activity: "Cultural Parade" }
+        ]
+    },
+    { 
+        eventId: 4,
+        title: "Entrepreneurship Summit",
+        description: "The PEC Entrepreneurship Summit is an exciting event designed to inspire and empower budding entrepreneurs. This summit will bring together a diverse group of successful business leaders, industry professionals, and investors, providing a unique opportunity for students to network, exchange ideas, and learn about the challenges and rewards of starting a business. Attendees will gain valuable insights into entrepreneurship, innovation, and scaling startups, which are essential for anyone looking to enter the world of business.",
+        date: "2025-01-15",
+        time: "9:00 AM",
+        venue: "PEC Conference Hall",
+        image: "upimage4.jpg",
+        agenda: [
+            { time: "09:00 AM", activity: "Keynote Address" },
+            { time: "10:00 AM", activity: "Entrepreneurship 101" },
+            { time: "11:00 AM", activity: "Pitching Ideas to Investors" },
+            { time: "12:00 PM", activity: "Networking Lunch" },
+            { time: "01:00 PM", activity: "Panel Discussion: Challenges of Startups" }
+        ]
+    },
+    {
+        eventId: 5,
+        title: "Hackathon 2024",
+        description: "The Hackathon 2024 is an intense, 48-hour coding challenge that brings together coders, designers, and engineers to collaborate and create innovative solutions for real-world problems. This event encourages creativity, teamwork, and technical skills in a fast-paced environment. Teams will work together to solve challenges, with the chance to win prizes and gain recognition. If you're looking to push your coding skills to the limit, Hackathon 2024 is the place to be!",
+        date: "2025-02-01",
+        time: "9:00 AM",
+        venue: "PEC Innovation Lab",
+        image: "upimage5.png",
+        agenda: [
+            { time: "09:00 AM", activity: "Hackathon Kick-off" },
+            { time: "10:00 AM", activity: "Team Formation and Idea Brainstorming" },
+            { time: "12:00 PM", activity: "Coding Begins" },
+            { time: "09:00 PM", activity: "Check-in and Progress Review" },
+            { time: "11:00 AM", activity: "Final Presentations and Judging" }
+        ]
+    },
+    {
+        eventId: 6,
+        title: "Data Science Conference",
+        description: "The Data Science Conference at PEC is an excellent opportunity for students and professionals to stay updated on the latest developments in the field of data analytics. Industry leaders and experts will share their insights on machine learning, big data, and artificial intelligence, offering attendees valuable knowledge on how to leverage data for business decisions. Whether you're looking to break into the field or deepen your expertise, this conference offers a wealth of information and networking opportunities.",
+        date: "2025-02-15",
+        time: "10:00 AM",
+        venue: "PEC Conference Hall",
+        image: "upimage6.jpg",
+        agenda: [
+            { time: "10:00 AM", activity: "Introduction to Data Science" },
+            { time: "11:00 AM", activity: "Data Analytics in Business" },
+            { time: "12:00 PM", activity: "Machine Learning and AI" },
+            { time: "01:00 PM", activity: "Networking Lunch" },
+            { time: "02:00 PM", activity: "Workshop on Predictive Analysis" }
+        ]
+    },
+    {
+        eventId: 7,
+        title: "Robotics Workshop",
+        description: "In this hands-on workshop, participants will learn the fundamentals of building and programming robots. From understanding sensors and actuators to constructing your own robot, this workshop will guide you through the entire process of robot creation. Whether you are a beginner or have some experience with robotics, this workshop provides a fantastic opportunity to dive deeper into this exciting field and gain practical experience.",
+        date: "2025-03-01",
+        time: "9:00 AM",
+        venue: "PEC Robotics Lab",
+        image: "upimage7.png",
+        agenda: [
+            { time: "09:00 AM", activity: "Introduction to Robotics" },
+            { time: "10:00 AM", activity: "Understanding Sensors and Actuators" },
+            { time: "11:00 AM", activity: "Building a Basic Robot" },
+            { time: "12:00 PM", activity: "Programming Robots" },
+            { time: "01:00 PM", activity: "Robot Demonstrations" }
+        ]
+    },
+    {
+        eventId: 8,
+        title: "Photography Contest",
+        description: "The Photography Contest invites all PEC students to showcase their photography skills and compete for exciting prizes. Whether you are a professional or a beginner, this contest offers an opportunity to capture the beauty of campus life, nature, and creativity. Submit your best shots and see if you have what it takes to be crowned the winner. Don't miss your chance to gain recognition and possibly win amazing prizes for your artistic work!",
+        date: "2025-03-10",
+        time: "10:00 AM",
+        venue: "PEC Photography Studio",
+        image: "upimage8.jpg",
+        agenda: [
+            { time: "10:00 AM", activity: "Introduction and Rules" },
+            { time: "10:30 AM", activity: "Photography Session Begins" },
+            { time: "12:30 PM", activity: "Submission Deadline" },
+            { time: "01:00 PM", activity: "Judging Panel Review" },
+            { time: "03:00 PM", activity: "Award Ceremony" }
+        ]
+    },
+    {
+        eventId: 9,
+        title: "Tech Talk: The Future of Cybersecurity",
+        description: "Join industry experts for an in-depth discussion on the evolving field of cybersecurity. This talk will cover the current and future landscape of cybersecurity threats, best practices for data protection, and how businesses and individuals can protect themselves from the growing number of cyberattacks. Learn about cutting-edge solutions and technologies that are shaping the future of cybersecurity and how you can stay ahead in this crucial area.",
+        date: "2025-03-20",
+        time: "11:00 AM",
+        venue: "PEC Conference Room",
+        image: "upimage9.jpg",
+        agenda: [
+            { time: "11:00 AM", activity: "Introduction to Cybersecurity" },
+            { time: "11:30 AM", activity: "Common Cybersecurity Threats" },
+            { time: "12:00 PM", activity: "Data Protection Techniques" },
+            { time: "01:00 PM", activity: "Networking Lunch" },
+            { time: "02:00 PM", activity: "Future of Cybersecurity and Emerging Tech" }
+        ]
+    },
+    {
+        eventId: 10,
+        title: "International Conference on Renewable Energy",
+        description: "This international conference will focus on the latest advancements in renewable energy technologies, including solar, wind, and hydroelectric power. Leading experts and innovators will share their insights on sustainable energy solutions that are transforming the global energy landscape. With environmental sustainability becoming a key issue worldwide, this conference will provide an excellent opportunity to network with professionals in the renewable energy field and discuss potential solutions to energy challenges.",
+        date: "2025-04-01",
+        time: "10:00 AM",
+        venue: "PEC Conference Hall",
+        image: "upimage10.jpg",
+        agenda: [
+            { time: "10:00 AM", activity: "Introduction to Renewable Energy" },
+            { time: "11:00 AM", activity: "Solar Energy Solutions" },
+            { time: "12:00 PM", activity: "Wind Energy Technologies" },
+            { time: "01:00 PM", activity: "Networking Lunch" },
+            { time: "02:00 PM", activity: "Future of Renewable Energy" }
+        ]
+    }
+];
+
+function getRandomEvents() {
+    const randomEvents = [];
+    const numberOfEvents = 3; 
+    while (randomEvents.length < numberOfEvents) {
+        const randomIndex = Math.floor(Math.random() * upcomingEvents.length);
+        const selectedEvent = upcomingEvents[randomIndex];
+        if (!randomEvents.includes(selectedEvent)) {
+            randomEvents.push(selectedEvent);
+        }
+    }
+    return randomEvents;
+}
+
+function getRandomEvents() {
+    const randomEvents = [];
+    const numberOfEvents = 3;
+    while (randomEvents.length < numberOfEvents) {
+        const randomIndex = Math.floor(Math.random() * upcomingEvents.length);
+        const selectedEvent = upcomingEvents[randomIndex];
+        if (!randomEvents.includes(selectedEvent)) {
+            randomEvents.push(selectedEvent);
+        }
+    }
+    return randomEvents;
+}
+
+function displayEventCarousel() {
+    const latestEventsContainer = document.getElementById('latest-events-container');
+    const selectedEvents = getRandomEvents();
+    let currentIndex = 0;
+    function updateEventDisplay() {
+        const event = selectedEvents[currentIndex];
+        latestEventsContainer.innerHTML = `
+        <fieldset>
+            <legend>${event.title}</legend>
+            <table>
+                <tr>
+                    <td>
+                        <strong>Description</strong>
+                        <p class="ed">${event.description}</p>
+                            <a class="view-link" href="javascript:void(0);" onclick="viewEventDetails(${event.eventId})">Click here to view</a>
+                    </td>
+                    <td><img class="event-image" src="${event.image}" alt="${event.title}"></td>
+                </tr>
+            </table>
+        </fieldset>
+        `;
+        currentIndex = (currentIndex + 1) % selectedEvents.length; 
+    }
+    updateEventDisplay(); 
+    setInterval(updateEventDisplay, 3000); 
+}
+
+function displayAllEvents() {
+    const upcomingEventsContainer = document.getElementById('upcoming-events-container');
+    upcomingEventsContainer.innerHTML = '';
+    upcomingEvents.forEach((event, index) => {
+        const eventHTML = `
+            <fieldset>
+                <legend>${event.title}</legend>
+                <table>
+                    <tr>
+                        <td>
+                            <strong>Description:</strong>
+                            <p class="ed">${event.description}</p>
+                            <a class="view-link" href="javascript:void(0);" onclick="viewEventDetails(${event.eventId})">Click here to view</a>
+                        </td>
+                        <td><img class="event-image" src="${event.image}" alt="${event.title}"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        `;
+        upcomingEventsContainer.innerHTML += eventHTML;
+    });
+}
+
+function viewEventDetails(eventId) {
+    const eventDetailsContainer = document.getElementById('event-details-container');
+    eventDetailsContainer.innerHTML = ''; 
+    const event = upcomingEvents.find(event => event.eventId === eventId);
+    if (!event) {
+        alert('Event not found!');
+        return;
+    }
+    eventDetailsContainer.innerHTML = `
+        <h3>${event.title}</h3>
+        <p><strong>Description:</strong> ${event.description}</p>
+        <p><strong>Date:</strong> ${event.date}</p>
+        <p><strong>Time:</strong> ${event.time}</p>
+        <p><strong>Venue:</strong> ${event.venue}</p>
+        <h4>Agenda:</h4>
+        <ul>
+            ${event.agenda.map(item => `<li><strong>${item.time}</strong>: ${item.activity}</li>`).join('')}
+        </ul>
+        <button class="register-button" onclick="registerEvent(${event.eventId}); closeEventDetails1()">Register Now</button>
+        <button onclick="closeEventDetails()">Close</button>
+    `;
+    eventDetailsContainer.classList.add('show');
+    showSection('.event-details'); 
+}
+
+let registeredEvents = [];
+function registerEvent(eventId) {
+    const event = upcomingEvents.find(event => event.eventId === eventId);
+    if (!event) {
+        alert('Event not found for registration!');
+        return;
+    }
+    if (!registeredEvents.some(registered => registered.eventId === event.eventId)) {
+        registeredEvents.push(event);
+    }
+    displayRegisteredEvents();
+    showSection('.registered-events');
+}
+
+function displayRegisteredEvents() {
+    const registeredEventsContainer = document.getElementById('registered-events-container');
+    registeredEventsContainer.innerHTML = ''; 
+    registeredEvents.forEach((event) => {
+        const eventHTML = `
+            <fieldset>
+                <legend>${event.title}</legend>
+                <table>
+                    <tr>
+                        <td>
+                            <strong>Description:</strong>
+                            <p class="ed">${event.description}</p>
+                            <a class="view-link" href="javascript:void(0);" onclick="viewEventDetails(${event.eventId})">Click here to view</a>
+                        </td>
+                        <td><img class="event-image" src="${event.image}" alt="${event.title}"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        `;
+        registeredEventsContainer.innerHTML += eventHTML;
+    });
+}
+
+function closeEventDetails() {
+    const eventDetailsContainer = document.getElementById('event-details-container');
+    eventDetailsContainer.innerHTML = '';
+    eventDetailsContainer.classList.remove('show');
+    showSection('.upcoming-events'); 
+}
+
+function closeEventDetails1() {
+    const eventDetailsContainer = document.getElementById('event-details-container');
+    eventDetailsContainer.innerHTML = ''; 
+    eventDetailsContainer.classList.remove('show');
+    showSection('.registered-events'); 
+}
+
+window.onload = function () {
+    displayEventCarousel();
+    displayAllEvents();
+    displayRegisteredEvents();
+};
+
+function showSection(section) {
+    const sections = document.querySelectorAll('.home, .upcoming-events, .login, .event-details, .registered-events');
+    sections.forEach(sec => sec.classList.remove('active'));
+    document.querySelector(section).classList.add('active');
+}
+
+        let currentImageIndex = 0;
+        const images = [
+            "paniimage1.png",
+            "paniimage2.jpg",
+            "paniimage3.jpg",
+            "paniimage4.jpeg",
+            "paniimage5.jpg"
+        ];
+
+        function changeImage() {
+            const carouselImage = document.getElementById("carousel-image");
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            carouselImage.src = images[currentImageIndex];
+        }
+
+        setInterval(changeImage, 3000); 
+
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId); 
+            const currentType = passwordInput.type; 
+            if (currentType == 'password') {
+                passwordInput.type = 'text'; 
+            } else {
+                passwordInput.type = 'password'; 
+            }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+    const users = [];    
+
+    function showRegistration() {
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('forgot-password-section').style.display = 'none';
+        document.getElementById('registration-section').style.display = 'block';
+    }
+
+    function showForgotPassword() {
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('registration-section').style.display = 'none';
+        document.getElementById('forgot-password-section').style.display = 'block';
+    }
+
+    function showLogin() {
+        document.getElementById('forgot-password-section').style.display = 'none';
+        document.getElementById('registration-section').style.display = 'none';
+        document.getElementById('login-section').style.display = 'block';
+    }
+
+    document.getElementById('registration-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('reg-name').value;
+        const age = document.getElementById('reg-age').value;
+        const gender = document.querySelector('input[name="reg-gender"]:checked').value;
+        const email = document.getElementById('reg-email').value;
+        const phone = document.getElementById('reg-phone').value;
+        const password = document.getElementById('reg-password').value;
+        const securityPin = document.getElementById('reg-security-pin').value;
+        if (users.some(user => user.email === email || user.securityPin === securityPin)) {
+            alert('Email or Security Pin already exists.');
+            return;
+        }
+        users.push({ name, age, gender, email, phone, password, securityPin });
+        alert('Registration successful!');
+        document.getElementById('registration-form').reset();
+        showLogin();
+    });
+
+    document.getElementById('forgot-password-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const email = document.getElementById('forgot-email').value;
+        const securityKey = document.getElementById('forgot-security-key').value;
+        const newPassword = document.getElementById('forgot-new-password').value;
+        const user = users.find(user => user.email === email && user.securityPin === securityKey);
+        if (!user) {
+            alert('Invalid email or security key.');
+            return;
+        }
+        user.password = newPassword;
+        alert('Password updated successfully!');
+        showLogin();
+    });
+
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        const user = users.find(user => user.email === email && user.password === password);
+        if (!user) {
+            alert('Invalid email or password.');
+            return;
+        }
+        alert('Login successful!');
+    });
+
+    document.getElementById('forgot-password-link').addEventListener('click', function (e) {
+        e.preventDefault();
+        showForgotPassword();
+    });
+
+    document.getElementById('registration-link').addEventListener('click', function (e) {
+        e.preventDefault();
+        showRegistration();
+    });
+});
+
+</script>
+
+</head>
+
+<body>
+
+    <div class="overlay"></div>
+    <div class="container1">
+
+    <header>
+        <div class="header-left">
+            <img src="panilogo.jpg" alt="PEC Logo">
+            <div class="title">
+                <h1 class="h1-header">PEC Event Management System</h1>
+                <div class="dropdown">
+                    <span>▼</span>
+                    <div class="dropdown-content">
+                        <p>Created By K...N And Created For</p>
+                        <p>Panimalar Engineering College</p>
+                        <p>An Autonomous Institution</p>
+                        <p>Affiliated To Anna University, Chennai.</p>
+                        <p>(Jaisakthi Educational Trust)</p>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <ul>
+                <li><a href="javascript:void(0);" onclick="showSection('.home')">Home</a></li>
+                <li><a href="javascript:void(0);" onclick="showSection('.registered-events')">Registered Events</a></li>
+                <li><a href="javascript:void(0);" onclick="showSection('.upcoming-events')">Upcoming Events</a></li>
+                <li><a href="javascript:void(0);" onclick="showSection('.login')">Login</a></li>    
+            </ul>
+        </div>
+    </header>
+
+    <div class="main-content">
+
+    <div class="home active">
+
+    <div class="about-section">
+        <div class="about-content">
+            <h2>About Us</h2>
+            <p>Welcome to the PEC Event Management System, your one-stop platform for organizing and managing events at Panimalar Engineering College. This system streamlines the process of event registration, scheduling, and coordination, ensuring a seamless experience for students, staff, and organizers alike.</p>
+            <p> With a variety of upcoming workshops, symposiums, cultural programs, and sports events, our platform empowers you to stay updated and participate in events that matter to you. Whether you're a student looking to explore new learning opportunities, a faculty member organizing an event, or an organizer seeking efficient coordination, the PEC Event Management System is designed to meet all your needs.</p>
+            <p>  Our user-friendly interface ensures easy access to event details, registration, and notifications, keeping you in the loop at all times. You can effortlessly track your registrations, receive timely reminders, and engage in the campus community. Join us today and be part of a vibrant and dynamic campus experience!</p>
+        </div>
+        <div class="image-carousel">
+            <img id="carousel-image" src="paniimage1.png" alt="College Image">
+        </div>
+    </div>
+
+<div class="latest-events">
+    <h2 class="latest-content">Latest Events</h2>
+    <div class="event-container" id="latest-events-container"></div>
+</div>
+</div>
+
+<div class="registered-events hidden" id="registered-events-container">
+    <div class="event-container" id="registered-events-container"></div>
+</div>
+
+<div class="upcoming-events hidden">
+    <div class="event-container" id="upcoming-events-container"></div>
+</div>
+
+<div class="event-details hidden" id="event-details-container"></div>
+</div>
+
+<div class="login hidden">
+    <div class="container" id="login-section">
+        <h2>User Login</h2>
+        <form id="login-form">
+            <table>
+                <tr>
+                    <td>Email ID:</td>
+                    <td><input type="email" id="login-email" required></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td>
+                        <div class="password-container">
+                            <input type="password" id="login-password" required>
+                            <span class="eye-icon" onclick="togglePassword('login-password')">👁️</span>
+                        </div>
+                        
+                    </td>
+                </tr>
+            </table>
+            <button type="submit">Submit</button>
+        </form>
+        <br>
+        <div class="links"><center>
+            <a href="#" id="forgot-password-link">Forgot Password?</a>&ensp;&emsp;&ensp;&emsp;
+            <a href="#" id="registration-link">New User Registration?</a>
+        </center></div>
+    </div>
+
+    <div class="container" id="registration-section" style="display: none;">
+        <h2>User Registration</h2>
+        <form id="registration-form">
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" id="reg-name" required></td>
+                </tr>
+                <tr>
+                    <td>Age:</td>
+                    <td><input type="number" id="reg-age" required></td>
+                </tr>
+                <tr>
+                    <td>Gender:</td>
+                    <td>
+                        <input type="radio" name="reg-gender" value="Male" required> Male
+                        <input type="radio" name="reg-gender" value="Female"> Female
+                        <input type="radio" name="reg-gender" value="Other"> Other
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="email" id="reg-email" required></td>
+                </tr>
+                <tr>
+                    <td>Phone Number:</td>
+                    <td><input type="tel" id="reg-phone" required></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><div class="password-container">
+                        <input type="password" id="reg-password" required>
+                        <span class="eye-icon" onclick="togglePassword('reg-password')">👁️</span>
+                    </div></td>
+                </tr>
+                <tr>
+                    <td>Security Pin:</td>
+                    <td><input type="number" id="reg-security-pin" required></td>
+                </tr>
+            </table>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <div class="container" id="forgot-password-section" style="display: none;">
+        <h2>Change Password</h2>
+        <form id="forgot-password-form">
+            <table>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="email" id="forgot-email" required></td>
+                </tr>
+                <tr>
+                    <td>Security Key:</td>
+                    <td><input type="number" id="forgot-security-key" required></td>
+                </tr>
+                <tr>
+                    <td>Set New Password:</td>
+                    <td><div class="password-container">
+                        <input type="password" id="forgot-new-password" required>
+                        <span class="eye-icon" onclick="togglePassword('forgot-new-password')">👁️</span>
+                    </div></td>
+                </tr>
+            </table>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+    <footer class="foot">
+        <div class="footer-line">
+            <p class="footer-p">2024 PEC Event Management</p><p>|</p><p class="footer-p">All Rights Reserved</p>
+        </div>
+        <div class="footer-line">
+            <p class="footer-p">
+                Contact us:
+            </p>
+            <p class="footer-p">
+                 <i class="fas fa-globe"></i> www.panimalar.ac.in
+            </p>
+            <p>|</p>
+            <p class="footer-p">
+                <i class="fas fa-envelope"></i> panimalar2000@gmail.com
+            </p>
+            <p>|</p>
+            <p class="footer-p">
+                <i class="fas fa-phone"></i> +91 9361661578
+            </p>
+        </div>
+        </footer></div>
+</body>
+</html>
